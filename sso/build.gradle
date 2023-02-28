@@ -37,7 +37,7 @@ android {
 dependencies {
     //ktor
     def ktorVersion = '2.2.3'
-    implementation "io.ktor:ktor-server-core:$ktorVersion"
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     // 没必要使用其他依赖
 }
