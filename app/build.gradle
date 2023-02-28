@@ -1,3 +1,5 @@
+import java.util.concurrent.TimeUnit
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -37,16 +39,16 @@ android {
             excludes += "/META-INF/io.netty.versions.properties"
         }
     }
-
-
 }
 
-
+// 取消 gradle 依赖缓存
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
+}
 
 dependencies {
-    implementation project(':lib_sso')
-
-    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation project(':sso')
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
