@@ -37,7 +37,7 @@ val layout = findViewById<FrameLayout>(R.id.layout)
 findViewById<Button>(R.id.btn_sso_login).apply {
   setOnClickListener {
     lifecycleScope.launch {
-      val data = SSOUtils.login(this@MainActivity, layout)
+      val data = SSOUtils.login(layout)
       Toast.makeText(this@MainActivity, data.toString(), Toast.LENGTH_SHORT).show()
     }
   }

@@ -39,8 +39,8 @@ object SSOUtils {
    *
    * @param parent 父布局，WebView 将会显示在该布局中，在登录成功或者协程被取消时移除 WebView
    */
-  suspend fun login(context: Context, parent: ViewGroup): Data {
-    val webView = createWebView(context, parent)
+  suspend fun login(parent: ViewGroup): Data {
+    val webView = createWebView(parent.context, parent)
     try {
       val data = createServer()
       parent.removeView(webView)

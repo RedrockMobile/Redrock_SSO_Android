@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             setOnClickListener {
                 Toast.makeText(this@MainActivity, "SSO登陆", Toast.LENGTH_SHORT).show()
                 lifecycleScope.launch {
-                    val data = SSOUtils.login(this@MainActivity, layout)
+                    val data = SSOUtils.login(layout)
                     Toast.makeText(this@MainActivity, data.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
