@@ -27,7 +27,7 @@ android {
 
 dependencies {
   // 版本号请看上方标签
-  implementation("com.github.RedrockMobile:Redrock_SSO_Android:x.x.x")
+  implementation("com.github.RedrockMobile:Redrock_SSO_Android:x.x")
 }
 ```
 
@@ -43,3 +43,6 @@ findViewById<Button>(R.id.btn_sso_login).apply {
   }
 }
 ```
+
+## 留给后人
+如果有修改，请发布对应的 release 和 jitpack 依赖。jitpack 依赖只需要打开 jitpack 官网输入该仓库地址即可，不需要任何权限和账号，任何人都可以发布
