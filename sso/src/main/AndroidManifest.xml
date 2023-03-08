@@ -6,9 +6,6 @@
 
     <application
         android:usesCleartextTraffic="true">
-        <activity android:name=".SSOActivity">
-
-        </activity>
     </application>
 
 </manifest>
