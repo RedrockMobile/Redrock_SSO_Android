@@ -36,7 +36,7 @@ android {
 
 dependencies {
     //ktor
-    def ktorVersion = '2.2.3'
+    def ktorVersion = '2.2.4'
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     // 没必要使用其他依赖
@@ -48,9 +48,6 @@ afterEvaluate {
             maven(MavenPublication) {
                 // 这个 release 对应上面的 singleVariant("release")
                 from components.release
-                groupId = 'com.redrock'
-                artifactId = 'sso'
-                version = '1.0'
             }
         }
     }
