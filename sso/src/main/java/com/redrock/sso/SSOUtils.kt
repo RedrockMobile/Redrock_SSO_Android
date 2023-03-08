@@ -8,16 +8,6 @@ import android.view.ViewGroup.LayoutParams
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.resume
 
 /**
  * .
@@ -80,7 +70,7 @@ object SSOUtils {
       settings.builtInZoomControls = true
       // 隐藏缩放控件
       settings.displayZoomControls = false
-      loadUrl("https://sso.redrock.team/auth/realms/master/protocol/openid-connect/auth?client_id=zscy&response_type=code&redirect_uri=http://localhost:53456/redrock")
+      loadUrl("https://sso.redrock.team/auth/realms/master/protocol/openid-connect/auth?client_id=zscy&response_type=code&redirect_uri=http://localhost:53456")
       parent.addView(
         this,
         LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -88,24 +78,7 @@ object SSOUtils {
     }
   }
   
-  private suspend fun createServer(): Data = withContext(Dispatchers.IO) {
-    suspendCancellableCoroutine { continuation ->
-      var server: NettyApplicationEngine? = null
-      server = embeddedServer(Netty, port = 53456) {
-        routing {
-          get("/redrock") {
-            call.respondText("Hello Redrocker", ContentType.Text.Plain)
-            val session = call.parameters["session_state"]!!
-            val code = call.parameters["code"]!!
-            continuation.resume(Data(session, code))
-            server?.stop(0, 0)
-          }
-        }
-      }
-      server.start()
-      continuation.invokeOnCancellation {
-        server.stop(0, 0)
-      }
-    }
+  private suspend fun createServer(): Data {
+    return Server.get()
   }
 }

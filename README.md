@@ -14,16 +14,6 @@ dependencyResolutionManagement {
 ### 2、build.gradle
 [![](https://jitpack.io/v/RedrockMobile/Redrock_SSO_Android.svg)](https://jitpack.io/#RedrockMobile/Redrock_SSO_Android)
 ```groovy
-android {
-  packagingOptions {
-    resources {
-      excludes += "/META-INF/{AL2.0,LGPL2.1}"
-      excludes += "/META-INF/INDEX.LIST"
-      excludes += "/META-INF/io.netty.versions.properties"
-    }
-  }
-}
-
 dependencies {
   // 版本号请看上方标签
   implementation("com.github.RedrockMobile:Redrock_SSO_Android:x.x")
