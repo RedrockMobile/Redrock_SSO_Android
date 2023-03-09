@@ -62,6 +62,12 @@ object SSOUtils {
           return super.shouldOverrideUrlLoading(view, request)
         }
       }
+      // 支持JS
+      true.also { settings.javaScriptEnabled = it }
+
+      // 开启Dom存储功能
+      settings.domStorageEnabled = true
+
       // 自适应屏幕
       settings.useWideViewPort = true
       settings.loadWithOverviewMode = true
