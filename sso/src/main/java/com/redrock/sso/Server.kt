@@ -21,13 +21,15 @@ internal object Server {
         continuation.invokeOnCancellation {
           serverSocket.close()
         }
+        var socket : Socket? = null
         try {
-          val socket = serverSocket.accept()
-          socket.close()
-          serverSocket.close()
+          socket = serverSocket.accept()
           continuation.resumeWith(Result.success(getData(socket)))
         } catch (_: SocketException) {
           // socket 被 serverSocket cancel 时抛出的异常
+        } finally {
+          socket?.close()
+          serverSocket.close()
         }
       }
     }
