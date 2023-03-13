@@ -8,6 +8,7 @@ import android.view.ViewGroup.LayoutParams
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.google.gson.Gson
 
 /**
  * .
@@ -21,6 +22,14 @@ object SSOUtils {
     val session: String,
     val code: String
   )
+
+  /**
+   * 获得用户token
+   */
+  suspend fun token(code : String) : Token? {
+    val token = Server.getToken(code) ?: return null
+    return Gson().fromJson(token,Token::class.java)
+  }
   
   /**
    * ## 注意事项

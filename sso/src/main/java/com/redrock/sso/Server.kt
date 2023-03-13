@@ -1,11 +1,18 @@
 package com.redrock.sso
 
+import android.util.Log
+import com.redrock.sso.Http.awaitResponse
+import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import okhttp3.*
+import okhttp3.Request
+import java.io.IOException
 import java.net.ServerSocket
 import java.net.Socket
 import java.net.SocketException
+
 
 /**
  * .
@@ -45,5 +52,23 @@ internal object Server {
         it.substring(0, index) to it.substring(index + 1, it.length)
       }
     return SSOUtils.Data(uriParam.getValue("session_state"), uriParam.getValue("code"))
+  }
+
+  suspend fun getToken(code : String) : String?{
+    var token : String? = null
+    val formBody: RequestBody = FormBody.Builder()
+      .add("grant_type","authorization_code")
+      .add("redirect_uri", "http://localhost:53456")
+      .add("code", code)
+      .build()
+
+    val request: Request = Request.Builder()
+      .url("https://sso.redrock.team/auth/realms/master/protocol/openid-connect/token")
+      .post(formBody)
+      .build()
+
+    val response = Http.OkHttpClient.newCall(request).awaitResponse()
+    token = response.body?.string()
+    return token
   }
 }

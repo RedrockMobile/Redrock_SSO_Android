@@ -36,7 +36,11 @@ android {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    // 没必要使用其他依赖
+
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
+
 }
 
 afterEvaluate {
